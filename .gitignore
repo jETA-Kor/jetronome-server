@@ -1,0 +1,8 @@
+# Node Modules
+node_modules/**/*
+
+# DB
+db/**/*
+
+# Test Script
+test.js

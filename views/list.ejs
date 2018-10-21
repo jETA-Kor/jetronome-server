@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Application List - Server Status Centre</title>
+    <style>
+        ul.app_desc {
+            margin: 0 0 20px 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        small.removeApp {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Application List</h1>
+    <small>Page generated at <%= locals.getTimeStr(new Date()); %></small>
+
+    <%
+        var ips = Object.keys(locals.apps);
+        var i = 0;
+        var el = null;
+        for (i = 0; i < ips.length; i++) {
+            el = locals.apps[ips[i]];
+            var nameOfIp = locals.getNameOfIp(ips[i]);
+    %>
+            <h3><%= ips[i] %><%= (nameOfIp) ? ' - ' + nameOfIp : '' %></h3>
+            <%
+                var j = 0;
+                var app = null;
+                for (j = 0; j < el.length; j++) {
+                    app = el[j];
+            %>
+                    <strong><%= (app.isOk) ? '○' : '●' %> <%= app.name %></strong>
+                    <small class="removeApp" onclick="removeApp('<%= app.name %>')">[remove]</small>
+                    <ul class="app_desc">
+                        <li>- IP: <%= app.ip %></li>
+                        <li>- Desc: <%= app.description %></li>
+                        <li>- Last Signal: <%= locals.getTimeStr(app.lastChecked); %></li>
+                        <% if (app.testApi) { %>
+                        <li>- Test: <a href="<%= app.testApi %>" target="_blank">Test API</a></li>
+                        <% } %>
+                    </ul>
+            <%
+                }
+            %>
+
+    <%
+        }
+    %>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    setTimeout(function () {
+        location.reload();
+    }, 5000);
+
+    window.removeApp = function (appName) {
+        $.ajax({
+            url: '/check',
+            method: 'DELETE',
+            data: {
+                name: appName,
+            }
+        }).done(function () {
+            location.reload();
+        });
+    };
+</script>
+
+</html>
