@@ -29,8 +29,9 @@
         for (i = 0; i < ips.length; i++) {
             el = locals.apps[ips[i]];
             var nameOfIp = locals.getNameOfIp(ips[i]);
+            var nameForProperty = nameOfIp.replace(/'/gi, '\\\'');
     %>
-            <h3><%= ips[i] %><%= (nameOfIp) ? ' - ' + nameOfIp : '' %></h3>
+            <h3><%= ips[i] %><%= (nameOfIp) ? ' - ' + nameOfIp : '' %> <small onclick="renameIp('<%= ips[i] %>', '<%= nameForProperty %>')">[#]</small></h3>
             <%
                 var j = 0;
                 var app = null;
@@ -68,6 +69,24 @@
             method: 'DELETE',
             data: {
                 name: appName,
+            }
+        }).done(function () {
+            location.reload();
+        });
+    };
+
+    window.renameIp = function (ip, currentName) {
+        var newName = window.prompt('Set a new name for ' + ip, currentName);
+        if (newName === null) {
+            return true;
+        }
+
+        $.ajax({
+            url: '/api/setNameOfIp',
+            method: 'POST',
+            data: {
+                ip: ip,
+                name: newName,
             }
         }).done(function () {
             location.reload();

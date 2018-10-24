@@ -67,7 +67,7 @@ const check = (info) => {
     }
 
     // 보관 중인 데이터가 부족하다면
-    if (!signal.ip) {
+    if (!signal.description) {
         signal.ip = info.ip || signal.ip;
         signal.description = info.description || signal.description;
     }

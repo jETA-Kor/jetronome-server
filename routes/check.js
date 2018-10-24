@@ -26,7 +26,7 @@ router.post('/', (req, res) => {
 
     const signal = serverStore.check(info);
 
-    if (signal.ip) {
+    if (signal.description) {
         res.sendStatus(200);
     } else {
         // 보관된 정보가 부족한 경우 (서버 재시작 등)

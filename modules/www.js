@@ -18,6 +18,7 @@ module.exports.start = (options) => {
 
     app.use('/list', require('../routes/list'));
     app.use('/check', require('../routes/check'));
+    app.use('/api', require('../routes/api'));
 
     http.createServer(app).listen(port, () => {
         console.log('HTTP server listening on port ' + port);
