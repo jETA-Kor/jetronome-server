@@ -15,6 +15,36 @@
         small.removeApp {
             cursor: pointer;
         }
+
+        div.ok, div.notOk {
+            margin-left: 20px;
+            border: 1px solid;
+            padding: 10px;
+            position: relative;
+            display: inline-block;
+            min-width: 20%;
+        }
+        div.ok ul, div.notOk ul { padding: 0; margin: 0; }
+        div.ok .appName, div.notOk .appName {
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        div.ok {
+            background-color: #BDE7FF;
+            border-color: #0085D5;
+        }
+        div.ok .appName {
+            color: #0085D5;
+        }
+
+        div.notOk {
+            background-color: #FFDFED;
+            border-color: #FF3188;
+        }
+        div.notOk .appName {
+            color: #FF3188;
+        }
     </style>
 </head>
 
@@ -29,7 +59,7 @@
         for (i = 0; i < ips.length; i++) {
             el = locals.apps[ips[i]];
             var nameOfIp = locals.getNameOfIp(ips[i]);
-            var nameForProperty = nameOfIp.replace(/'/gi, '\\\'');
+            var nameForProperty = (nameOfIp || '').replace(/'/gi, '\\\'');
     %>
             <h3><%= ips[i] %><%= (nameOfIp) ? ' - ' + nameOfIp : '' %> <small onclick="renameIp('<%= ips[i] %>', '<%= nameForProperty %>')">[#]</small></h3>
             <%
@@ -38,20 +68,21 @@
                 for (j = 0; j < el.length; j++) {
                     app = el[j];
             %>
-                    <strong><%= (app.isOk) ? '○' : '●' %> <%= app.name %></strong>
-                    <small class="removeApp" onclick="removeApp('<%= app.name %>')">[remove]</small>
-                    <ul class="app_desc">
-                        <li>- IP: <%= app.ip %></li>
-                        <li>- Desc: <%= app.description %></li>
-                        <li>- Last Signal: <%= locals.getTimeStr(app.lastChecked); %></li>
-                        <% if (app.testApi) { %>
-                        <li>- Test: <a href="<%= app.testApi %>" target="_blank">Test API</a></li>
-                        <% } %>
-                    </ul>
+                    <div class="<%= (app.isOk) ? 'ok' : 'notOk' %>">
+                        <strong class="appName"><%= app.name %></strong>
+                        <small class="removeApp" onclick="removeApp('<%= app.name %>')">[remove]</small>
+                        <ul class="app_desc">
+                            <li>- IP: <%= app.ip %></li>
+                            <li>- Desc: <%= app.description %></li>
+                            <li>- Last Signal: <%= locals.getTimeStr(app.lastChecked); %></li>
+                            <% if (app.testApi) { %>
+                            <li>- Test: <a href="<%= app.testApi %>" target="_blank">Test API</a></li>
+                            <% } %>
+                        </ul>
+                    </div>
             <%
                 }
             %>
-
     <%
         }
     %>
