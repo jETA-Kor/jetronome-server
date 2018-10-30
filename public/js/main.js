@@ -90,7 +90,7 @@ var updater = function () {
 
         $('#lastUpdated').text(moment().format('YYYY-MM-DD HH:mm:ss'));
     }).fail(function (err) {
-        debugger;
+        console.error(err);
     }).always(function () {
         setTimeout(updater, 5000);
     });
