@@ -20,7 +20,7 @@ module.exports.start = (options) => {
     app.use('/check', require('../routes/check'));
     app.use('/api', require('../routes/api'));
 
-    app.use(express.static('public'));
+    app.use(express.static(path.join(__dirname, '..', 'public')));
 
     http.createServer(app).listen(port, () => {
         console.log('HTTP server listening on port ' + port);
