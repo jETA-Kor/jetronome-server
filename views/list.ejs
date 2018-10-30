@@ -23,7 +23,7 @@
             var nameOfIp = locals.getNameOfIp(ips[i]);
             var nameForProperty = (nameOfIp || '').replace(/'/gi, '\\\'');
     %>
-    <div class="appListWrap" id="ip_<%= ips[i].replace(/:/gi, '_') %>">
+    <div class="appListWrap" id="ip_<%= ips[i].replace(/[:|.]/gi, '_') %>">
         <h3><%= ips[i] %><%= (nameOfIp) ? ' - ' + nameOfIp : '' %> <small onclick="renameIp('<%= ips[i] %>', '<%= nameForProperty %>')">[#]</small></h3>
         <%
             var j = 0;

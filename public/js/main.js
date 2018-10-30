@@ -32,7 +32,7 @@ window.renameIp = function (ip, currentName) {
 
 var newIpBlock = function (ip) {
     var html = '';
-    html += '<div class="appListWrap" id="ip_' + ip.replace(/:/gi, '_') + '">';
+    html += '<div class="appListWrap" id="ip_' + ip.replace(/[:|.]/gi, '_') + '">';
     html += '    <h3>' + ip + ' <small onclick="renameIp(\'' + ip + '\', \'\')">[#]</small></h3>';
     html += '</div>';
 
@@ -52,7 +52,7 @@ var newAppBlock = function (app) {
     html += '    </span>';
     html += '</div>';
 
-    $('#ip_' + app.ip.replace(/:/gi, '_')).append(html);
+    $('#ip_' + app.ip.replace(/[:|.]/gi, '_')).append(html);
 };
 
 var updater = function () {
@@ -62,10 +62,10 @@ var updater = function () {
         var tmp = body.pop();
 
         while(tmp) {
-            var ipBlock = $('#ip_' + tmp.ip.replace(/:/gi, '_'));
+            var ipBlock = $('#ip_' + tmp.ip.replace(/[:|.]/gi, '_'));
             if (ipBlock.length === 0) {
                 newIpBlock(tmp.ip);
-                ipBlock = $('#ip_' + tmp.ip.replace(/:/gi, '_'));
+                ipBlock = $('#ip_' + tmp.ip.replace(/[:|.]/gi, '_'));
             }
 
             var appBlock = $('#app_' + tmp.id);

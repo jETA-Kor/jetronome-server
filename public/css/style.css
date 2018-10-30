@@ -67,7 +67,8 @@ a.testApiLink {
         width: 50%;
         margin-right: -5px;
     }
-    div.appListWrap > div:nth-child(2) {
+    div.appListWrap > div:nth-of-type(2) {
+    /* div.appListWrap > div:nth-child(2) { */
         border-top-width: 1px;
     }
 }
