@@ -1,6 +1,7 @@
 const _ = require('underscore');
 const request = require('request');
 const fs = require('fs');
+const uuidv4 = require('uuid/v4');
 
 const alert = require('./alert');
 const logger = require('./logger');
@@ -72,6 +73,9 @@ const check = (info) => {
         signal.description = info.description || signal.description;
     }
 
+    // App의 ID 지정
+    signal.id = signal.id || uuidv4();
+
     // App의 IP가 변경되었다면
     if (signal.ip !== info.ip) {
         logger('IP Changed: ' + info.name);
@@ -125,6 +129,7 @@ const status = () => {
         const isOk = ((new Date() - el.lastChecked) < (el.interval * 3));
 
         results.push({
+            id: el.id,
             name: el.name,
             ip: el.ip,
             description: el.description,
