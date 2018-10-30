@@ -32,9 +32,9 @@ const send = (options, failType) => {
     let msg = '';
     msg += '*○ ' + options.name + '*\n';
     if (failType === 'test') {
-        msg += '- Test failure: [Test API](' + options.testApi + ')\n';
+        msg += '- Test failed: [Test API](' + options.testApi + ')\n';
     } else {
-        msg += '- Signal missed.\n';
+        msg += '- Signal loss.\n';
     }
     msg += '- IP: ' + options.ip + '\n';
     msg += '- Last signal: ' + lastCheckedStr;
