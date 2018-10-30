@@ -1,0 +1,79 @@
+* {
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+body { padding: 0 15px; }
+
+div.appListWrap > div:first-child {
+    border-top-width: 1px;
+}
+
+div.ok, div.notOk {
+    position: relative;
+    display: inline-block;
+
+    width: 100%;
+
+    border-width: 0 1px 1px 1px;
+    border-style: solid;
+    padding: 10px;
+
+    box-sizing: border-box;
+}
+div.ok > strong, div.notOk > strong,
+div.ok > span, div.notOk > span,
+div.ok > a, div.notOk > a,
+div.ok > small, div.notOk > small {
+    display: inline-block;
+    margin: 0 -5px;
+}
+
+div.ok {
+    background-color: #BDE7FF;
+    border-color: #0085D5;
+}
+div.ok .appName {
+    color: #0085D5;
+}
+
+div.notOk {
+    background-color: #FFDFED;
+    border-color: #FF3188;
+}
+div.notOk .appName {
+    color: #FF3188;
+}
+
+.appName { width: 100%; }
+.appName .removeApp {
+    cursor: pointer;
+    color: #000;
+    font-weight: lighter;
+}
+.appDesc { width: 100%; }
+.lastSignal { float: right; }
+a.testApiLink {
+    margin-left: 10px;
+
+    color: #000;
+    font-size: small;
+
+    text-decoration: none;
+}
+
+@media screen and (min-width: 992px) {
+    div.ok, div.notOk {
+        display: inline-block;
+        width: 50%;
+        margin-right: -5px;
+    }
+    div.appListWrap > div:nth-child(2) {
+        border-top-width: 1px;
+    }
+}
+@media screen and (max-width: 720px) {
+    .lastSignal {
+        float: none;
+        display: block;
+    }
+}
