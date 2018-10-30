@@ -12,7 +12,7 @@
 
 <body>
     <h1>Application List</h1>
-    <small>Page generated at <%= locals.getTimeStr(new Date()); %></small>
+    <small>Page generated at <span id="lastUpdated"><%= locals.getTimeStr(new Date()); %></span></small>
 
     <%
         var ips = Object.keys(locals.apps);
@@ -23,32 +23,35 @@
             var nameOfIp = locals.getNameOfIp(ips[i]);
             var nameForProperty = (nameOfIp || '').replace(/'/gi, '\\\'');
     %>
-            <h3><%= ips[i] %><%= (nameOfIp) ? ' - ' + nameOfIp : '' %> <small onclick="renameIp('<%= ips[i] %>', '<%= nameForProperty %>')">[#]</small></h3>
-            <div class="appListWrap">
-            <%
-                var j = 0;
-                var app = null;
-                for (j = 0; j < el.length; j++) {
-                    app = el[j];
-            %>
-                    <div class="<%= (app.isOk) ? 'ok' : 'notOk' %>" id="app_<%= app.id %>">
-                        <strong class="appName"><%= app.name %> <small class="removeApp" onclick="removeApp('<%= app.name %>')">[×]</small></strong>
-                        <span class="appDesc">
-                            <span class="appDescTxt"><%= app.description %></span>
+    <div class="appListWrap" id="ip_<%= ips[i].replace(/:/gi, '_') %>">
+        <h3><%= ips[i] %><%= (nameOfIp) ? ' - ' + nameOfIp : '' %> <small onclick="renameIp('<%= ips[i] %>', '<%= nameForProperty %>')">[#]</small></h3>
+        <%
+            var j = 0;
+            var app = null;
+            for (j = 0; j < el.length; j++) {
+                app = el[j];
+        %>
+                <div class="<%= (app.isOk) ? 'ok' : 'notOk' %>" id="app_<%= app.id %>">
+                    <strong class="appName"><%= app.name %> <small class="removeApp" onclick="removeApp('<%= app.name %>')">[×]</small></strong>
+                    <span class="appDesc">
+                        <span class="appDescTxt"><%= app.description %></span>
+                        <% if (app.testApi) { %>
                             <a class="testApiLink" href="<%= app.testApi %>" target="_blank">[Test API]</a>
-                            <span class="lastSignal"><%= locals.getTimeStr(app.lastChecked); %></span>
-                        </span>
-                    </div>
-            <%
-                }
-            %>
-            </div>
+                        <% } %>
+                        <span class="lastSignal"><%= locals.getTimeStr(app.lastChecked); %></span>
+                    </span>
+                </div>
+        <%
+            }
+        %>
+    </div>
     <%
         }
     %>
 </body>
 
 <script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/moment-2.22.2.min.js"></script>
 <script src="/js/main.js"></script>
 
 </html>

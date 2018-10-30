@@ -9,10 +9,7 @@ router.get('/', (req, res) => {
 
     // 요청한 데이터 유형이 JSON인 경우
     if (req.query.type === 'json') {
-        res.send(_.map(serverStoreData, (el) => {
-            el.lastSignalStr = moment(lastSignal).format('YYYY-MM-DD HH:mm:ss');
-            return el;
-        }));
+        res.send(serverStoreData);
         return true;
     }
 

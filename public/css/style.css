@@ -4,7 +4,7 @@
 
 body { padding: 0 15px; }
 
-div.appListWrap > div:first-child {
+div.appListWrap div:first-of-type {
     border-top-width: 1px;
 }
 
