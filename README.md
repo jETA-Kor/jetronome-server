@@ -17,13 +17,13 @@ $ npm i --save jetronome-server
 ## Usage
 #### Initialize
 ```
-    require('jetronome-server')({
-        alertFn: (name, msg) => { // The function to be executed when an alarm occurs.
-            console.error(name);
-            console.error(msg);
-        },
-        port: 7828, // (Optional) Web server port. Default port is 7828(s.t.a.t)
-    });
+require('jetronome-server')({
+    alertFn: (name, msg) => { // The function to be executed when an alarm occurs.
+        console.error(name);
+        console.error(msg);
+    },
+    port: 7828, // (Optional) Web server port. Default port is 7828(s.t.a.t)
+});
 ```
 
 #### List
