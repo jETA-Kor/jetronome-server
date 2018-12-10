@@ -8,12 +8,19 @@ router.post('/', (req, res) => {
         ? req.ip.substr(7)
         : req.ip;
 
+    const stat = {
+        cpu: req.body.cpu,
+        memory: req.body.memory,
+        disk: req.body.disk,
+    };
+
     const info = {
         name: req.body.name,
         ip: reqIp,
         description: req.body.description,
         testApi: req.body.testApi,
         interval: req.body.interval || 5000,
+        stat: (stat.cpu) ? stat : null,
     };
 
     const init = req.query.init;

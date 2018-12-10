@@ -136,6 +136,7 @@ const status = () => {
             testApi: el.testApi,
             lastChecked: el.lastChecked,
             isOk: isOk,
+            stat: el.stat,
         });
     });
 

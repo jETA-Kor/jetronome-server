@@ -7,12 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Application List - Jetronome</title>
     <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/solid.css" integrity="sha384-rdyFrfAIC05c5ph7BKz3l5NG5yEottvO/DQ0dCrwD8gzeQDjYBHNr1ucUpQuljos"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/fontawesome.css" integrity="sha384-u5J7JghGz0qUrmEsWzBQkfvc8nK3fUT7DCaQzNQ+q4oEXhGSx+P2OqjWsfIRB8QT"
+        crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css" />
 </head>
 
 <body>
     <h1>Application List</h1>
-    <small>Page generated at <span id="lastUpdated"><%= locals.getTimeStr(new Date()); %></span></small>
+    <small>Page generated at <span id="lastUpdated">
+            <%= locals.getTimeStr(new Date()); %></span></small>
 
     <%
         var ips = Object.keys(locals.apps);
@@ -24,23 +29,38 @@
             var nameForProperty = (nameOfIp || '').replace(/'/gi, '\\\'');
     %>
     <div class="appListWrap" id="ip_<%= ips[i].replace(/[:|.]/gi, '_') %>">
-        <h3><%= ips[i] %><%= (nameOfIp) ? ' - ' + nameOfIp : '' %> <small onclick="renameIp('<%= ips[i] %>', '<%= nameForProperty %>')">[#]</small></h3>
+        <h3>
+            <%= ips[i] %>
+            <%= (nameOfIp) ? ' - ' + nameOfIp : '' %> <small onclick="renameIp('<%= ips[i] %>', '<%= nameForProperty %>')">[#]</small></h3>
         <%
             var j = 0;
             var app = null;
             for (j = 0; j < el.length; j++) {
                 app = el[j];
         %>
-                <div class="<%= (app.isOk) ? 'ok' : 'notOk' %>" id="app_<%= app.id %>">
-                    <strong class="appName"><%= app.name %> <small class="removeApp" onclick="removeApp('<%= app.name %>')">[×]</small></strong>
-                    <span class="appDesc">
-                        <span class="appDescTxt"><%= app.description %></span>
-                        <% if (app.testApi) { %>
-                            <a class="testApiLink" href="<%= app.testApi %>" target="_blank">[Test API]</a>
-                        <% } %>
-                        <span class="lastSignal"><%= locals.getTimeStr(app.lastChecked); %></span>
-                    </span>
-                </div>
+        <div class="<%= (app.isOk) ? 'ok' : 'notOk' %>" id="app_<%= app.id %>" title="<%= app.name %>: <%= app.description %>">
+            <strong class="appName">
+                <%= app.name %> <small class="removeApp" onclick="removeApp('<%= app.name %>')">[×]</small></strong>
+            <span class="appDesc">
+                <span class="appDescTxt">
+                    <%= app.description %></span>
+                <% if (app.testApi) { %>
+                <a class="testApiLink" href="<%= app.testApi %>" target="_blank">[Test API]</a>
+                <% } %>
+                <% if (app.stat) { %>
+                <span class="stat">
+                    <span class="statCpu"><i class="fas fa-microchip"></i>
+                        <%= app.stat.cpu %></span>
+                    <span class="statMemory"><i class="fas fa-memory"></i>
+                        <%= app.stat.memory %></span>
+                    <span class="statDisk"><i class="fas fa-hdd"></i>
+                        <%= app.stat.disk %></span>
+                </span>
+                <% } %>
+                <span class="lastSignal">
+                    <%= locals.getTimeStr(app.lastChecked); %></span>
+            </span>
+        </div>
         <%
             }
         %>

@@ -4,19 +4,21 @@
 
 body { padding: 0 15px; }
 
-div.appListWrap div:first-of-type {
-    border-top-width: 1px;
-}
+div.appListWrap { font-size: 0; }
+div.appListWrap h3 { font-size: 1.17rem; }
 
 div.ok, div.notOk {
     position: relative;
     display: inline-block;
 
+    font-size: 1rem;
+
     width: 100%;
 
-    border-width: 0 1px 1px 1px;
+    border-width: 1px;
     border-style: solid;
     padding: 10px;
+    margin-bottom: -1px;
 
     box-sizing: border-box;
 }
@@ -31,17 +33,25 @@ div.ok > small, div.notOk > small {
 div.ok {
     background-color: #BDE7FF;
     border-color: #0085D5;
+    margin-right: -1px;
 }
-div.ok .appName {
-    color: #0085D5;
-}
+div.ok .appName { color: #0085D5; }
+div.ok .appDescTxt { display: none; }
 
 div.notOk {
     background-color: #FFDFED;
     border-color: #FF3188;
+    width: 100% !important;
+    float: left;
+    margin-bottom: -1px;
+    border-width: 1px;
 }
 div.notOk .appName {
     color: #FF3188;
+}
+div.notOk .stat {
+    float: none;
+    margin-left: 10px;
 }
 
 .appName { width: 100%; }
@@ -51,6 +61,13 @@ div.notOk .appName {
     font-weight: lighter;
 }
 .appDesc { width: 100%; }
+.stat {
+    float: left;
+    font-size: 0.7em;
+    padding-top: 5px;
+}
+.stat .statCpu,
+.stat .statMemory { margin-right: 4px; }
 .lastSignal { float: right; }
 a.testApiLink {
     margin-left: 10px;
@@ -61,20 +78,35 @@ a.testApiLink {
     text-decoration: none;
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 640px) {
     div.ok, div.notOk {
         display: inline-block;
         width: 50%;
-        margin-right: -5px;
+        box-sizing: border-box;
     }
-    div.appListWrap > div:nth-of-type(2) {
-    /* div.appListWrap > div:nth-child(2) { */
-        border-top-width: 1px;
+
+    div.notOk {
+        width: calc(100% - 1px) !important;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    div.ok, div.notOk {
+        display: inline-block;
+        width: 25%;
+        box-sizing: border-box;
+    }
+
+    div.notOk {
+        width: calc(100% - 3px) !important;
     }
 }
 @media screen and (max-width: 720px) {
+    .stat {
+        display: none !important;
+    }
     .lastSignal {
-        float: none;
-        display: block;
+        float: none !important;
+        display: block !important;
     }
 }

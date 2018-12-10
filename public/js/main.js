@@ -1,5 +1,3 @@
-// var
-
 window.removeApp = function (appName) {
     $.ajax({
         url: '/check',
@@ -41,7 +39,7 @@ var newIpBlock = function (ip) {
 var newAppBlock = function (app) {
     var html = '';
 
-    html += '<div class="ok" id="app_' + app.id + '">';
+    html += '<div class="ok" id="app_' + app.id + '" title="' + app.name + ':' + app.description + '">';
     html += '    <strong class="appName">' + app.name + ' <small class="removeApp" onclick="removeApp(\'' + app.name + '\')">[×]</small></strong>';
     html += '    <span class="appDesc">';
     html += '        <span class="appDescTxt">' + app.description + '</span>';
@@ -93,9 +91,14 @@ var updater = function () {
         console.error(err);
     }).always(function () {
         setTimeout(updater, 5000);
+        $('html, body').animate({scrollTop: $('.notOk').offset().top - 100});
     });
 };
 
 $(function () {
     updater();
 });
+
+setTimeout(function () {
+    location.reload();
+}, 1000 * 60 * 30);
