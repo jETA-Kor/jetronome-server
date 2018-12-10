@@ -85,6 +85,7 @@ const check = (info) => {
 
     signal.alert = getAlert(signal); // 새 신호 누락 처리 함수 추가
     signal.lastChecked = new Date(); // 신호 수신 시간 저장
+    signal.stat = info.stat; // 시스템 상태 갱신
 
     servers[info.name] = signal; // 수신된 신호 등록
 

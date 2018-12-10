@@ -49,12 +49,9 @@
                 <% } %>
                 <% if (app.stat) { %>
                 <span class="stat">
-                    <span class="statCpu"><i class="fas fa-microchip"></i>
-                        <%= app.stat.cpu %></span>
-                    <span class="statMemory"><i class="fas fa-memory"></i>
-                        <%= app.stat.memory %></span>
-                    <span class="statDisk"><i class="fas fa-hdd"></i>
-                        <%= app.stat.disk %></span>
+                    <i class="fas fa-microchip"></i><span class="statCpu"><%= Math.round(app.stat.cpu) %></span>
+                    <i class="fas fa-memory"></i><span class="statMemory"><%= Math.round(app.stat.memory) %></span>
+                    <i class="fas fa-hdd"></i><span class="statDisk"><%= Math.round(app.stat.disk) %></span>
                 </span>
                 <% } %>
                 <span class="lastSignal">

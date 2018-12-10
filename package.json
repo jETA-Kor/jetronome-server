@@ -1,6 +1,6 @@
 {
   "name": "jetronome-server",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Simple application status checking server.",
   "main": "jetronome-server.js",
   "author": "jETA",
